@@ -40,7 +40,7 @@ RSpec.describe User, type: :model do
     it 'パスワードは、6文字以上での入力が必須であること' do
       user = User.new(nickname: 'test', email: 'test@example.com', password: 'pass1', password_confirmation: 'pass1', last_name_kanji: '山田', first_name_kanji: '太郎', last_name_kana: 'ヤマダ', first_name_kana: 'タロウ', birthday: Date.new(2000, 1, 1))
       user.valid?
-      expect(user.errors.full_messages).to include("is too short (minimum is 6 characters)")
+      expect(user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
     end
 
     it 'パスワードは、半角英数字混合での入力が必須であること' do
