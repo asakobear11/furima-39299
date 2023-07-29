@@ -6,12 +6,13 @@ RSpec.describe User, type: :model do
   end
 
   describe 'ユーザー新規登録' do
+
     context '新規登録できるとき' do
       it 'nickname、email、password、password_confirmation、last_name_kanji、first_name_kanji、last_name_kana、first_name_kana、birthdayが存在すれば登録できる' do
         expect(@user).to be_valid
       end
-      end
     end
+
     context '新規登録できないとき' do
       it 'ニックネームが空だと登録できない' do
         @user.nickname = ''
@@ -67,7 +68,6 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include('Password is invalid')
       end
-      end
 
       it 'パスワードとパスワード（確認）は、値が一致していないと登録できない' do
         @user.password = 'password123',
@@ -119,7 +119,7 @@ RSpec.describe User, type: :model do
       end
 
       it '名（カナ）にカタカナ以外の文字（平仮名・漢字・英数字・記号）が含まれていると登録できない' do
-        @user.last_name_kana = 'ﾀﾛｳ'
+        @user.first_name_kana = 'ﾀﾛｳ'
         @user.valid?
         expect(@user.errors.full_messages).to include('First name kana is invalid')
       end
