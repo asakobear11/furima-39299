@@ -6,8 +6,8 @@ class User < ApplicationRecord
 
   with_options presence: true do
     validates :nickname
-    validates :last_name_kanji, format: { with: /\A[ぁ-んァ-ン一-龥]/ }
-    validates :first_name_kanji, format: { with: /\A[ぁ-んァ-ン一-龥]/ }
+    validates :last_name_kanji, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/ }
+    validates :first_name_kanji, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/ }
     validates :last_name_kana, format: { with: /\A[ァ-ヶー－]+\z/ }
     validates :first_name_kana, format: { with: /\A[ァ-ヶー－]+\z/ }
     validates :birthday
