@@ -4,7 +4,7 @@ FactoryBot.define do
       person { Gimei.name }
     end
 
-    nickname              { Faker::Name.name }    
+    nickname              { Faker::Name.name }
     email                 { Faker::Internet.free_email }
     password              { '1a' + Faker::Internet.password(min_length: 6) }
     password_confirmation { password }
@@ -15,5 +15,3 @@ FactoryBot.define do
     birthday              { Faker::Date.birthday }
   end
 end
-
-
