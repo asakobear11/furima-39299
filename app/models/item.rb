@@ -9,13 +9,27 @@ class Item < ApplicationRecord
 
   has_one_attached :image
 
+  with_options presence: true do
+    validates :image
+    validates :item_name
+    validates :description
+    validates :price,                format: { with: /\A\d+\z/, message: "は半角数値のみ入力してください" },  numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
+  end
 
-  validates :image, :item_name, :description, :details_category_id, :details_condition_id, :delivery_cost_id, :prefecture_id, :delivery_date_id, :price, presence: true
+  with_options presence: true, numericality: { only_integer: true, other_than: 0 } do
+    validates :details_category_id,  format: { with: /\A([1-9]|10)\z/ }                                       
+    validates :details_condition_id, format: { with: /\A[1-6]\z/ }                                          
+    validates :delivery_cost_id,     format: { with: /\A[1-2]\z/ }                                          
+    validates :prefecture_id,        format: { with: /\A([1-9]|[1-3][0-9]|4[0-7])\z/ }                                         
+    validates :delivery_date_id,     format: { with: /\A[1-3]\z/ }
+  end
 
-  validates :details_category_id, :details_condition_id, :delivery_cost_id, :prefecture_id, :delivery_date_id, numericality: { other_than: 0 , message: "can't be blank"} 
 
-  validates :price, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
-  validates :price, format: { with: /\A\d+\z/, message: "は半角数値のみ入力してください" }
-
+#  validates :image, :item_name, :description, :details_category_id, :details_condition_id, :delivery_cost_id, :prefecture_id, :delivery_date_id, :price, presence: true
+#
+#  validates :details_category_id, :details_condition_id, :delivery_cost_id, :prefecture_id, :delivery_date_id, numericality: { other_than: 0 , message: "can't be blank"} 
+#
+#  validates :price, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
+#  validates :price, format: { with: /\A\d+\z/, message: "は半角数値のみ入力してください" }
 
 end
