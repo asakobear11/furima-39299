@@ -1,5 +1,8 @@
 FactoryBot.define do
   factory :order_address do
+    association :item
+    user { item.user }
+
     transient do
       address { Gimei.address }
     end
@@ -9,8 +12,6 @@ FactoryBot.define do
     city           { address.city.kanji }
     block          { address.town.kanji }
     phone_number   { Faker::Number.number(digits: rand(10..11)) }
-    user_id        { Faker::Number.positive }
-    item_id        { Faker::Number.positive }
     token          { 'tok_abcdefghijk00000000000000000' }
   end
 end
