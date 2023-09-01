@@ -11,7 +11,6 @@ FactoryBot.define do
     phone_number   { Faker::Number.number(digits: rand(10..11)) }
     user_id        { Faker::Number.positive }
     item_id        { Faker::Number.positive }
-    token          {"tok_abcdefghijk00000000000000000"}
-
+    token          { 'tok_abcdefghijk00000000000000000' }
   end
 end

@@ -12,7 +12,7 @@ RSpec.describe OrderAddress, type: :model do
       end
 
       it 'buildingは空でも保存できる' do
-        @order_address.building=''
+        @order_address.building = ''
         expect(@order_address).to be_valid
       end
     end
@@ -25,9 +25,9 @@ RSpec.describe OrderAddress, type: :model do
       end
 
       it 'postcodeが「3桁ハイフン4桁」の半角文字列以外では購入できない' do
-        @order_address.postcode = 1234567
+        @order_address.postcode = 1_234_567
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Postcode is invalid")
+        expect(@order_address.errors.full_messages).to include('Postcode is invalid')
       end
 
       it 'prefecture_idが空では購入できない' do
@@ -55,23 +55,22 @@ RSpec.describe OrderAddress, type: :model do
       end
 
       it 'phone_numberが10桁未満では購入できない' do
-        @order_address.phone_number = 123456789
+        @order_address.phone_number = 123_456_789
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Phone number is invalid")
+        expect(@order_address.errors.full_messages).to include('Phone number is invalid')
       end
 
       it 'phone_numberが12桁以上では購入できない' do
-        @order_address.phone_number = 123456789012
+        @order_address.phone_number = 123_456_789_012
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include("Phone number is invalid")
+        expect(@order_address.errors.full_messages).to include('Phone number is invalid')
       end
 
-      it "tokenが空では登録できないこと" do
+      it 'tokenが空では登録できないこと' do
         @order_address.token = nil
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Token can't be blank")
       end
-      
     end
   end
 end
