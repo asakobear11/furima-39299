@@ -1,6 +1,8 @@
 class AddressesController < ApplicationController
   
-  before_action :authenticate_user!, except: :index
+  before_action :authenticate_user!
+  before_action :move_to_root, except: [:create]
+
 
   def index
     @order_address = OrderAddress.new
@@ -34,5 +36,10 @@ class AddressesController < ApplicationController
       )
   end
 
-  
+  def move_to_root
+    @item = Item.find(params[:item_id])
+    if @item.user_id != current_user.id && @item.order.present? || @item.user_id == current_user.id
+      redirect_to root_path
+    end
+  end
 end
